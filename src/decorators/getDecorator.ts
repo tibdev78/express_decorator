@@ -10,7 +10,7 @@ import {RouteDefinition} from '../models';
       }
   
       // Get the routes stored so far, extend it by the new route and re-set the metadata.
-      const routes = Reflect.getMetadata('routes', target.constructor) as Array<RouteDefinition>;
+      const routes: Array<RouteDefinition> = Reflect.getMetadata('routes', target.constructor);
   
       routes.push({
         method: 'get',

@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { UsersController } from '../controllers';
 import * as express from 'express';
 import {RouteDefinition} from '../models';
