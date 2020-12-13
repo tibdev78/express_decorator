@@ -1,15 +1,25 @@
-import { Request, Response } from 'express';
-import { Controller, Get } from '../decorators';
+import { Get, Param, Post, Body, Res, JsonController, HttpCode, OnUndefined} from "routing-controllers";
+import { ResponseRequest, User } from '../models';
 
-@Controller('/user')
+@JsonController('/users')
 export class UsersController {
     @Get('/')
-    getUsers(req: Request, res: Response) {
-        res.send('Typescript Decorators are awesome !!!');
+    getUsers() {
+        return 'Typescript Decorators are awesome !!!';
     }
 
     @Get('/:name')
-    getAUser(req: Request, res: Response) {
-        res.send(`Profile of ${req.params.name}`)
+    getAUser(@Param("name") name: string) {
+        return `Profile of ${name}`;
+    }
+
+    @HttpCode(200)
+    @Post('/save')
+    @OnUndefined(404)
+    saveUser(@Body({required: true, type: ""}) user: User): ResponseRequest {
+        return {
+            data: user,
+            message: 'user Save'
+        };
     }
 }
