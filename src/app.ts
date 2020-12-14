@@ -1,10 +1,10 @@
 import 'reflect-metadata';
-import { createExpressServer } from "routing-controllers";
-import * as rg from './routes/register';
+import { createExpressServer } from 'routing-controllers';
+import logger from './utils/logger';
 
 const app = createExpressServer({
-    cors: true,
-    controllers: rg.registerController(),
+  cors: true,
+  controllers: [`${__dirname  }/controllers/*.ts`],
 });
 
-app.listen(3000, () => console.log('Server is running on port 3000'))
+app.listen(3000, () => logger.info({timeStamp: new Date().toLocaleString(), message: "Server is running on port 3000"}));
